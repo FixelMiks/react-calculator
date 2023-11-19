@@ -21,30 +21,26 @@ export function App() {
 	let [isResultClick, setResultClick] = useState(false);
 
 	const onClickNum1 = (event) => {
-		event.preventDefault();
 		setCurrentNum1((updatedNum1 = '') => updatedNum1 + event.target.innerHTML);
 	};
 
 	const onClickNum2 = (event) => {
-		event.preventDefault();
 		setCurrentNum2((updatedNum2 = '') => updatedNum2 + event.target.innerHTML);
 	};
 
 	const onClickAction = (event) => {
-		event.preventDefault();
 		setCurrentAction((updatedAction = '') => updatedAction + event.target.innerHTML);
 		setResultClick(false);
 	};
 
-	const onClickReset = (event) => {
+	const onClickReset = () => {
 		setCurrentNum1('');
 		setCurrentNum2('');
 		setCurrentAction('');
 		setResultClick(false);
 	};
 
-	const checkResult = (event) => {
-		event.preventDefault();
+	const checkResult = () => {
 		if (currentNum2) {
 			if (currentAction === '+') {
 				setCurrentNum1(
@@ -65,14 +61,14 @@ export function App() {
 	};
 
 	return (
-		<form className={styles.app}>
+		<div className={styles.app}>
 			<div className={styles.container}>
 				<div className={!isResultClick ? styles.display : styles.display__result}>
 					{currentNum1 + currentAction + currentNum2}
 				</div>
 				<div className={styles.btn_container}>
 					<ul className={styles.list_numbers}>
-						{NUMBERS.map((id, number) => (
+						{NUMBERS.map(({ id, number }) => (
 							<li className={styles.item} key={id}>
 								<button
 									className={styles.btn_number}
@@ -116,6 +112,6 @@ export function App() {
 					</ul>
 				</div>
 			</div>
-		</form>
+		</div>
 	);
 }
